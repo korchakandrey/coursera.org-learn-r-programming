@@ -5,12 +5,17 @@
 
 makeCacheMatrix <- function(x = matrix()) {
   m <- matrix(ncol = dim(x)[2], nrow =dim(x)[1] )
+  #setting the data
   set <- function(y) {
       x <<- y
       m <<- NULL
   }
+  #getting the data
   get <- function(){ x } 
+  #getting solved matrix
   getsolve <- function(){ m }
+  
+  #setting solution of the matrix
   setsolve <- function(){ if( det(x) != 0 ) m <<- solve(x)  
                           else {
                             message("This matrix do not have inverse!")
@@ -18,6 +23,7 @@ makeCacheMatrix <- function(x = matrix()) {
                           }
                         }
 
+  #object to return
   list(set = set, get = get, setsolve = setsolve, getsolve = getsolve)
 }
 
@@ -25,11 +31,15 @@ makeCacheMatrix <- function(x = matrix()) {
 ## Write a short comment describing this function
 
 cacheSolve <- function(x, ...) {
+  #Getting the result
   m <- x$getsolve()
+  
+  #if result already exist - returning it
   if(!all(is.na(m))) {
     message("getting cached data")
     return(m)
   }
+  #Solving the matrix and returning the result
   x$setsolve()
   message("getting calculated data")
   x$getsolve()

@@ -41,7 +41,7 @@ cacheSolve <- function(x, ...) {
 # The first check
         m1<-matrix(1:16,nrow = 4)
         mc1<-makeCacheMatrix( m1 )
-        cachesolve(mc1)
+        cacheSolve(mc1)
         #This matrix do not have inverse!
         #[1] NA
         ## This is correct because matrix has zero discriminant( do not have inverse )
@@ -49,18 +49,18 @@ cacheSolve <- function(x, ...) {
 # The Second Check
         m2 <- matrix(rnorm(16,4,2),ncol = 4)
         mc2<-makeCacheMatrix( m2 )
-        cachesolve(mc2)
+        cacheSolve(mc2)
         # [1] inverse matrix returned
 
-        cachesolve(mc2)
+        cacheSolve(mc2)
         # getting cached data
         # [1] inverse matrix returned
 
 # The Third Example( very big martix ) - to check productivity
         m3  <- matrix(rnorm(16000000,67,23), nrow = 4000, byrow = TRUE)
         ms3 <- makeCacheMatrix(m3)
-        cachesolve(ms3)
+        cacheSolve(ms3)
         #takes some time to compute
         
-        cachesolve(ms3)
+        cacheSolve(ms3)
         #computes almost immediatly
